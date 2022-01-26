@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_session_invoice">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <table class="table table-condensed" style="border: 3px solid black !important;">
+                                    <tr>
+                                        <td width="40%">
+                                            <p style="text-align: center; padding-top: 10px;">
+<!--                                                <img t-if="not o.image" t-att-src="" height="140" border="1"-->
+<!--                                                     width="120"/>-->
+<!--                                                <img t-if="not o.image" t-att-src="" height="140" border="1"-->
+<!--                                                     width="120"/>-->
+                                            </p>
+                                        </td>
+                                        <td width="60%">
+                                            <table>
+                                                <tr>
+                                                    <td colspan="3" class="text-center">
+                                                        <span t-field="o.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <strong>Course</strong>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>:</span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="o.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>
+                                                            <strong>Instructor:</strong>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>:</span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="o.instructor"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <t t-if="o.attendee_ids">
+                            <span>Attendees</span>
+                            <table class="table table-sm o_main_table" name="attendees">
+                                <thead>
+                                    <tr>
+                                        <th name="th_name" class="text-left">
+                                            <span>Name</span>
+                                        </th>
+                                        <th name="th_email" class="text-left">
+                                            <span>Email</span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <t t-set="attendee_count" t-value="0"/>
+                                <t t-foreach="o.attendee_ids" t-as="line">
+                                    <t t-set="attendee_count" t-value="attendee_count + 1"/>
+                                    <tr>
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.email"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="2">
+                                        Total Attendees
+                                    </td>
+                                    <td>
+                                        <t t-esc="attendee_count"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

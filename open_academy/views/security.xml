@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="module_course_management" model="ir.module.category">
+        <field name="name">Course Management</field>
+    </record>
+    <record id="group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_course_management"/>
+    </record>
+</odoo>

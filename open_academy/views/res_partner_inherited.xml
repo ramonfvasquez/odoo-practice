@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Res Partner Form View -->
+    <record id="res_partner_form_view" model="ir.ui.view">
+        <field name="name">Partner Inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website']" position="after">
+                <field name="is_instructor" string="Is Instructor?"/>
+                <field name="is_teacher" string="Is Teacher?"/>
+                <field name="teacher_lvl" string="Teacher Level"/>
+            </xpath>
+            <xpath expr="//field[@name='is_instructor']" position="after">
+                <field name="session_ids" string="Course Sessions"/>
+            </xpath>
+        </field>
+    </record>
+     <!-- Res Partner Tree View -->
+    <record id="res_partner_tree_view" model="ir.ui.view">
+        <field name="name">Partner Inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="before">
+                <field name="is_instructor" string="Inst.?"/>
+                <field name="is_teacher" string="Teach.?"/>
+                <field name="teacher_lvl" string="Lvl."/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

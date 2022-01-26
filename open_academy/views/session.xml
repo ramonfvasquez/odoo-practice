@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Session Form View -->
+    <record id="session_form_view" model="ir.ui.view">
+        <field name="name">Session</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <form string="Session Form">
+                <group>
+                    <field name="name">Session Name</field>
+                    <field name="active">Active</field>
+                    <field name="start_date">Start Date</field>
+                    <field name="duration">Duration</field>
+                    <field name="number_of_seats">No of Seats</field>
+                    <field name="occupied_seats" widget="progressbar">Occupied Seats</field>
+                    <field name="instructor" domain="['|', ('is_instructor', '=', True), ('is_teacher', '=', True)]">Instructor</field>
+                    <field name="course_ids">Courses</field>
+                    <field name="attendee_ids">Attendees</field>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- Session Tree View -->
+    <record id="session_tree_view" model="ir.ui.view">
+        <field name="name">Sessions</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <tree string="Session Tree View"
+                  decoration-success="duration&lt;31"
+                  decoration-primary="duration&lt;61"
+                  decoration-danger="duration&gt;60">
+                <field name="name"/>
+                <field name="active"/>
+                <field name="start_date"/>
+                <field name="duration"/>
+                <field name="number_of_seats"/>
+                <field name="occupied_seats" widget="progressbar"/>
+                <field name="course_ids"/>
+                <field name="instructor"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Session Calendar View -->
+    <record id="session_calendar_view" model="ir.ui.view">
+        <field name="name">Sessions</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Sessions" date_start="start_date" color="instructor">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="session_search_view" model="ir.ui.view">
+        <field name="name">Session Search View</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <search string="Sessions">
+                <field name="name"/>
+                <field name="instructor"/>
+                <field name="duration"/>
+                <filter name="instructor" string="My Sessions" domain="[('instructor', '=', uid)]"/>
+                <group string="Group by">
+                    <filter name="group_by_instructor" string="Instructor"
+                            context="{'group_by': 'instructor'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Session Kanban View -->
+    <record id="session_kanban_view" model="ir.ui.view">
+        <field name="name">Session Kanban View</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+            </kanban>
+        </field>
+    </record>
+    <!-- Session Graph View -->
+    <record id="session_graph_view" model="ir.ui.view">
+        <field name="name">Session Graph View</field>
+        <field name="model">session.session</field>
+        <field name="arch" type="xml">
+            <graph string="No of Seats">
+                <field name="number_of_seats"/>
+            </graph>
+        </field>
+    </record>
+    <!-- Actions for Session -->
+    <record id="session_action" model="ir.actions.act_window">
+        <field name="name">Session</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">session.session</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+    </record>
+    <!-- Menu Item for Session -->
+    <menuitem id="session_menu"
+              name="Sessions"
+              sequence="1"
+              action="session_action"/>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Course Form View -->
+    <record id="course_form_view" model="ir.ui.view">
+        <field name="name">Courses</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <form string="Course Form">
+                <group>
+                    <field name="name">Title</field>
+                </group>
+                <notebook>
+                    <page string="Description">
+                        <field name="description" nolabel="1"/>
+                    </page>
+                </notebook>
+                <group>
+                    <field name="session_id">Session</field>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- Course Tree View -->
+    <record id="course_tree_view" model="ir.ui.view">
+        <field name="name">Courses</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course List">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="session_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Course Search View -->
+    <record id="course_search_view" model="ir.ui.view">
+        <field name="name">Search Course</field>
+        <field name="model">course.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+    <!-- Actions for Course -->
+    <record id="course_action" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">course.course</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Menu Item for Open Academy -->
+    <menuitem id="course_menu" name="Open Academy"
+              sequence="0" action="course_action"/>
+</odoo>
